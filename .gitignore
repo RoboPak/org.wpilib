@@ -1,1 +1,2 @@
 *.deb
+.flatpak-builder/
