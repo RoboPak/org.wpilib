@@ -1,0 +1,31 @@
+{
+    "build": {
+        "dockerfile": "./Dockerfile",
+        "context": "."
+    },
+    "features": {
+        "ghcr.io/devcontainers/features/common-utils:2": {
+            "installZsh": "true",
+            "username": "vscode",
+            "userUid": "1000",
+            "userGid": "1000",
+            "upgradePackages": "true"
+        },
+        "ghcr.io/devcontainers/features/git:1": {
+            "version": "latest",
+            "ppa": "false"
+        }
+    },
+    "remoteUser": "vscode",
+    "runArgs": ["--privileged"],
+    "customizations": {
+        "codespaces": {
+            "repositories": {
+                "*": {
+                    "cloneSubmodules": true
+                }
+            }
+        }
+    },
+    "postCreateCommand": "flatpak --user remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo && flatpak --user install -y flathub org.freedesktop.Platform//23.08 org.freedesktop.Sdk//23.08"
+}
