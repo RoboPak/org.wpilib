@@ -1,11 +1,12 @@
-app-id: com.visualstudio.code
+app-id: io.github.kaympe20.wpi
 runtime: org.freedesktop.Sdk
 runtime-version: '24.08'
 sdk: org.freedesktop.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.openjdk17
 base: org.electronjs.Electron2.BaseApp
 base-version: '24.08'
 command: code
-tags: [proprietary]
 separate-locales: false
 finish-args:
   - --require-version=0.10.3
@@ -145,3 +146,15 @@ modules:
         sha256: c42c12be6cdd83e374b847bec836659fb45231215797777c9ee1c9c0ae9e3783
         dest-filename: host-spawn
         only-arches: [aarch64]
+        
+  - name: openjdk
+    buildsystem: simple
+    build-commands:
+      - /usr/lib/sdk/openjdk17/install.sh
+
+  - buildsystem: simple
+    sources:
+      - type: file
+        url: "https://github.com/wpilibsuite/vscode-wpilib/releases/download/v2024.3.2/vscode-wpilib-2024.3.2.vsix"
+    build-commands:
+      - code --install-extension vscode-wpilib-2024.3.2.vsix
